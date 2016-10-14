@@ -1,11 +1,14 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 
 import com.example.lohra.myapplication.backend.myApi.MyApi;
+import com.example.myandroidlibrary.LibraryActivity;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -45,8 +48,9 @@ public class EndPointAsync extends AsyncTask<Pair<Context, String>, Void, String
         String name = params[0].second;
 
         try {
-            return myApiService.sayHi(name).execute().getData();
-        } catch (IOException e) {
+            return myApiService.getAwesomeJoke(name).execute().getData();
+//            return "a";
+        } catch (Exception e) {
             return e.getMessage();
         }
     }
@@ -54,5 +58,9 @@ public class EndPointAsync extends AsyncTask<Pair<Context, String>, Void, String
     @Override
     protected void onPostExecute(String result) {
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(context, LibraryActivity.class);
+        intent.putExtra("joke",result);
+        context.startActivity(intent);
+
     }
 }

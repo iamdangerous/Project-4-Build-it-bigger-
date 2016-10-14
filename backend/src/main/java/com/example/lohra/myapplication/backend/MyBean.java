@@ -15,4 +15,5 @@ public class MyBean {
     public void setData(String data) {
         myData = data;
     }
+
 }
