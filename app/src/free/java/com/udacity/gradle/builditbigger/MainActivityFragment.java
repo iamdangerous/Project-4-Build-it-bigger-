@@ -23,9 +23,8 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
-        MobileAds.initialize(getContext(), "ca-app-pub-3940256099942544/6300978111");
 
-        AdView mAdView = (AdView) root.findViewById(R.id.adView);
+//        AdView mAdView = (AdView) root.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
@@ -35,9 +34,9 @@ public class MainActivityFragment extends Fragment {
 //        mAdView.loadAd(adRequest);
 
 //        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
-        mAdView.loadAd(adRequest);
+//        AdRequest adRequest = new AdRequest.Builder()
+//                .build();
+//        mAdView.loadAd(adRequest);
         return root;
     }
 }

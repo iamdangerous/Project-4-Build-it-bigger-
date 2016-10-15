@@ -15,7 +15,7 @@
     <facet type="app-engine-gradle" name="App Engine Gradle">
       <configuration>
         <option name="HTTP_ADDRESS" value="localhost" />
-        <option name="HTTP_PORT" value="8081" />
+        <option name="HTTP_PORT" value="8080" />
         <option name="WAR_DIR" value="D:\Projects\ud867-master\FinalProject\backend\build\exploded-app" />
         <option name="WEB_APP_DIR" value="D:\Projects\ud867-master\FinalProject\backend\src\main\webapp" />
         <option name="APPENGINE_SDKROOT" value="C:\Users\lohra\.gradle\appengine-sdk\appengine-java-sdk-1.9.34" />
@@ -44,6 +44,5 @@
     <orderEntry type="library" exported="" name="appengine-endpoints-deps-1.9.34" level="project" />
     <orderEntry type="library" exported="" name="servlet-api-2.5" level="project" />
     <orderEntry type="library" exported="" name="appengine-api-1.0-sdk-1.9.34" level="project" />
-    <orderEntry type="library" exported="" name="backend.backend-android-endpoints" level="project" />
   </component>
 </module>

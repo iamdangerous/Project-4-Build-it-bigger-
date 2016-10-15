@@ -8,19 +8,40 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+
 public class MainActivity extends AppCompatActivity {
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//    }
-//
+    InterstitialAd mInterstitialAd;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        MobileAds.initialize(this, "ca-app-pub-3940256099942544/6300978111");
 
+        setupAd();
+        requestNewInterstitial();
+
+    }
+
+    void setupAd(){
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                new EndPointAsync().execute(new Pair<Context, String>(MainActivity.this, "Manfred"));
+            }
+
+
+        });
     }
 
 
@@ -47,13 +68,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
+        if(mInterstitialAd.isLoaded()){
+            mInterstitialAd.show();
+        }else {
+            new EndPointAsync().execute(new Pair<Context, String>(this, "Manfred"));
+        }
+    }
 
-        new EndPointAsync().execute(new Pair<Context, String>(this, "Manfred"));
-//        String joke = MyJokeClass.getJoke();
-//        Intent intent = new Intent(this, LibraryActivity.class);
-//        intent.putExtra("joke",joke);
-//        startActivity(intent);
-//        Toast.makeText(this, joke, Toast.LENGTH_SHORT).show();
+
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
     }
 
 }
