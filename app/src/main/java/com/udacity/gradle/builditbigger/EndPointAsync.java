@@ -1,5 +1,6 @@
 package com.udacity.gradle.builditbigger;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -24,6 +25,25 @@ import java.io.IOException;
 public class EndPointAsync extends AsyncTask<Pair<Context, String>, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+    private ProgressDialog progressDialog;
+
+
+    public EndPointAsync(Context context){
+        this.context = context;
+    }
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Connecting");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setProgress(10);
+        progressDialog.setCancelable(false);
+        //progressDialog.setIndeterminate(true);
+        progressDialog.show();
+
+    }
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
@@ -35,6 +55,7 @@ public class EndPointAsync extends AsyncTask<Pair<Context, String>, Void, String
 
     @Override
     protected void onPostExecute(String result) {
+        progressDialog.dismiss();
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(context, LibraryActivity.class);
         intent.putExtra("joke",result);

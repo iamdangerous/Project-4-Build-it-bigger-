@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void tellJoke(View view) {
 
-        new EndPointAsync().execute(new Pair<Context, String>(this, "Manfred"));
+        new EndPointAsync(this).execute(new Pair<Context, String>(this, "Manfred"));
 
     }
 

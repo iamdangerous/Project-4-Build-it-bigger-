@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdClosed() {
                 super.onAdClosed();
-                new EndPointAsync().execute(new Pair<Context, String>(MainActivity.this, "Manfred"));
+                new EndPointAsync(MainActivity.this).execute(new Pair<Context, String>(MainActivity.this, "Manfred"));
             }
 
 
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         if(mInterstitialAd.isLoaded()){
             mInterstitialAd.show();
         }else {
-            new EndPointAsync().execute(new Pair<Context, String>(this, "Manfred"));
+            new EndPointAsync(this).execute(new Pair<Context, String>(this, "Manfred"));
         }
     }
 
