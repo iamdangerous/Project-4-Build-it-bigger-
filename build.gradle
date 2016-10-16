@@ -16,4 +16,34 @@ allprojects {
     repositories {
         jcenter()
     }
+
+    task runGce{
+        dependsOn ":backend:appengineRun"
+        doLast{
+            println " Running Gce"
+        }
+    }
+
+    task stopGce{
+        dependsOn ":backend:appengineStop"
+        doLast{
+            println "Stopping Gce"
+        }
+    }
+
+    task performTest{
+        dependsOn"runGce"
+        dependsOn ":app:connectedAndroidTest"
+        doLast{
+            println "Performing Testing"
+        }
+    }
+
+    task doMyJob{
+        group "udacity task"
+        dependsOn "runGce","performTest","stopGce"
+        doLast{
+            println "Job is done"
+        }
+    }
 }
