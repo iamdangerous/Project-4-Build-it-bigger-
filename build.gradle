@@ -17,33 +17,45 @@ allprojects {
         jcenter()
     }
 
-    task runGce{
-        dependsOn ":backend:appengineRun"
-        doLast{
-            println " Running Gce"
-        }
-    }
 
-    task stopGce{
-        dependsOn ":backend:appengineStop"
-        doLast{
-            println "Stopping Gce"
-        }
-    }
+}
 
-    task performTest{
-        dependsOn"runGce"
-        dependsOn ":app:connectedAndroidTest"
-        doLast{
-            println "Performing Testing"
-        }
-    }
-
-    task doMyJob{
-        group "udacity task"
-        dependsOn "runGce","performTest","stopGce"
-        doLast{
-            println "Job is done"
-        }
+task runGce {
+    dependsOn "backend:appengineRun"
+    doLast {
+        println "AppEngine started"
     }
 }
+
+task stopGce {
+    mustRunAfter "performTest"
+    dependsOn ":backend:appengineStop"
+    doLast {
+        println "Stopping Gce"
+    }
+}
+
+task performTest {
+    evaluationDependsOn ':backend'
+    dependsOn ":app:connectedAndroidTest"
+    mustRunAfter "runGce"
+    doLast {
+        println "Performing Testing"
+    }
+}
+
+task doMyJob {
+    group "udacity task"
+    dependsOn "runGce", "performTest", "stopGce"
+    doLast {
+        println "Job is done"
+    }
+
+}
+project(":backend") {
+    appengine {
+        daemon true
+    }
+}
+
+
