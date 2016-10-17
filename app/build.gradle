@@ -34,7 +34,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // Added for AdMob
 //    compile 'com.google.android.gms:play-services-ads:9.4.0'
-    compile project(':myjavalibrary')
     compile project(':myandroidlibrary')
 
 
